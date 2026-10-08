@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b1020">
+  <meta name="description" content="Nivasa AI — modern multilingual real-estate marketplace with AI tools, EMI calculator, calendar and voice search.">
+  <title>Nivasa AI — Smart Real Estate Marketplace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+
+  <header class="navbar">
+    <a href="#home" class="brand">
+      <span class="brand-mark">N</span>
+      <span>Nivasa<span class="brand-ai">AI</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#explore" data-i18n="navExplore">Explore</a>
+      <a href="#tools" data-i18n="navTools">Smart Tools</a>
+      <a href="#calendar" data-i18n="navCalendar">Calendar</a>
+      <a href="#about" data-i18n="navAbout">About</a>
+    </nav>
+    <div class="nav-actions">
+      <select id="language" class="language" aria-label="Language">
+        <option value="en">EN</option><option value="hi">हिं</option><option value="mr">मर</option>
+        <option value="ml">മല</option><option value="ta">தமி</option>
+      </select>
+      <button class="icon-btn" id="themeBtn" title="Toggle theme">☾</button>
+      <button class="menu-btn" id="menuBtn">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero section" id="home">
+      <div class="hero-copy reveal">
+        <div class="eyebrow"><span class="pulse-dot"></span> AI-powered property discovery</div>
+        <h1>Find a place.<br><span class="gradient-text">Build a future.</span></h1>
+        <p data-i18n="heroText">Discover verified-style listings, compare properties, estimate EMIs and plan visits — all in one beautiful experience.</p>
+        <div class="hero-buttons">
+          <a class="btn primary" href="#explore">Explore properties <span>↗</span></a>
+          <button class="btn glass" id="aiOpen">✦ Ask Nivasa AI</button>
+        </div>
+        <div class="trust-row">
+          <div><strong>2.4K+</strong><span>demo listings</span></div>
+          <div><strong>5</strong><span>languages</span></div>
+          <div><strong>24/7</strong><span>AI assistance</span></div>
+        </div>
+      </div>
+      <div class="hero-visual reveal">
+        <div class="hero-card floating">
+          <div class="hero-image" style="background-image:url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=85')">
+            <span class="tag">✦ AI Pick</span>
+            <button class="heart hero-heart">♡</button>
+          </div>
+          <div class="hero-property">
+            <div><span class="muted">Featured home</span><h3>Skyline Villa</h3><p>Baner, Pune · 4 BHK · 2,850 sq.ft</p></div>
+            <strong>₹2.35 Cr</strong>
+          </div>
+        </div>
+        <div class="floating-chip chip-one">✦ 94% match</div>
+        <div class="floating-chip chip-two">₹1.12L est. EMI</div>
+      </div>
+    </section>
+
+    <section class="search-wrap" id="explore">
+      <div class="search-panel">
+        <div class="search-main">
+          <span>⌕</span><input id="searchInput" placeholder="Search city, locality or property..." data-i18n-placeholder="searchPlaceholder">
+          <button id="voiceBtn" class="voice-btn" title="Voice search">🎙</button>
+        </div>
+        <div class="search-fields">
+          <select id="cityFilter"><option value="">All cities</option><option>Pune</option><option>Mumbai</option><option>Nagpur</option><option>Bengaluru</option><option>Hyderabad</option><option>Chennai</option></select>
+          <select id="typeFilter"><option value="">Any type</option><option>Apartment</option><option>Villa</option><option>House</option><option>Plot</option></select>
+          <select id="purposeFilter"><option value="">Buy / Rent</option><option value="Buy">Buy</option><option value="Rent">Rent</option></select>
+          <button class="btn primary search-btn" id="searchBtn">Search</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="listings">
+      <div class="section-heading">
+        <div><span class="eyebrow">CURATED FOR YOU</span><h2>Properties worth seeing</h2></div>
+        <button class="text-btn" id="resetFilters">Reset filters ↻</button>
+      </div>
+      <div class="category-row">
+        <button class="category active" data-cat="">All</button><button class="category" data-cat="Apartment">Apartments</button>
+        <button class="category" data-cat="Villa">Villas</button><button class="category" data-cat="House">Houses</button>
+        <button class="category" data-cat="Plot">Plots</button>
+      </div>
+      <div class="property-grid" id="propertyGrid"></div>
+    </section>
+
+    <section class="section tools-section" id="tools">
+      <div class="section-heading"><div><span class="eyebrow">SMART TOOLS</span><h2>Make the numbers make sense.</h2></div></div>
+      <div class="tools-grid">
+        <article class="tool-card tool-large">
+          <div class="tool-icon">₹</div><h3>Home Loan EMI Calculator</h3><p>Instantly estimate your monthly payment, interest and total cost.</p>
+          <div class="calculator">
+            <label>Property price <output id="priceOut">₹80,00,000</output><input id="price" type="range" min="1000000" max="50000000" step="100000" value="8000000"></label>
+            <label>Down payment <output id="downOut">₹20,00,000</output><input id="down" type="range" min="0" max="40000000" step="100000" value="2000000"></label>
+            <div class="two-inputs"><label>Rate %<input id="rate" type="number" value="8.5" step="0.1"></label><label>Years<input id="years" type="number" value="20" min="1" max="40"></label></div>
+            <div class="emi-result"><span>Estimated monthly EMI</span><strong id="emi">₹52,035</strong><small id="emiDetail">Loan ₹60,00,000 · Total interest ₹64,88,400</small></div>
+          </div>
+        </article>
+        <article class="tool-card ai-card">
+          <div class="tool-icon sparkle">✦</div><h3>AI Property Match</h3><p>Tell Nivasa what your ideal home feels like. Get an instant match score from the demo listings.</p>
+          <div class="ai-input"><input id="aiPreference" placeholder="e.g. 2 BHK near Pune under 1 Cr"><button id="matchBtn">Match</button></div>
+          <div id="matchResult" class="match-result">Your personalized match will appear here.</div>
+        </article>
+        <article class="tool-card">
+          <div class="tool-icon">⌁</div><h3>Affordability Snapshot</h3><p>Quick planning estimate based on your monthly budget.</p>
+          <label class="budget-label">Monthly budget <output id="budgetOut">₹60,000</output></label>
+          <input id="budget" type="range" min="10000" max="300000" step="5000" value="60000">
+          <div class="big-number" id="affordability">₹74L</div><span class="muted">Approx. property budget</span>
+        </article>
+        <article class="tool-card">
+          <div class="tool-icon">♥</div><h3>Saved Homes</h3><p>Keep your favorites on this device. No account or paid service required.</p>
+          <div class="saved-number" id="savedCount">0</div><button class="btn outline" onclick="document.getElementById('listings').scrollIntoView({behavior:'smooth'})">Browse homes</button>
+        </article>
+      </div>
+    </section>
+
+    <section class="section calendar-section" id="calendar">
+      <div class="section-heading"><div><span class="eyebrow">VISIT PLANNER</span><h2>Plan your property visits.</h2></div></div>
+      <div class="calendar-layout">
+        <div class="calendar-card">
+          <div class="calendar-top"><button id="prevMonth">‹</button><h3 id="monthTitle"></h3><button id="nextMonth">›</button></div>
+          <div class="weekdays"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div>
+          <div class="days" id="calendarDays"></div>
+        </div>
+        <div class="events-card">
+          <span class="eyebrow">SCHEDULE</span><h3 id="selectedDate">Select a date</h3>
+          <div id="eventList" class="event-list"></div>
+          <div class="event-add"><input id="eventInput" placeholder="Add a visit or reminder"><button id="addEvent">Add</button></div>
+          <small class="muted">Events are saved locally in your browser.</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="section feature-banner">
+      <div><span class="eyebrow">ONE PLATFORM</span><h2>Search smarter. Decide faster.</h2><p>Designed for buyers, sellers, renters and property explorers — with AI-inspired tools that work without expensive APIs.</p></div>
+      <div class="feature-pills"><span>🌍 5 languages</span><span>🎙 Voice-friendly</span><span>☾ Dark mode</span><span>⚡ Fast & free</span></div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="about-grid">
+        <div><span class="eyebrow">ABOUT NIVASA AI</span><h2>A portfolio-grade real-estate experience.</h2><p>Built as a free frontend concept using vanilla HTML, CSS and JavaScript. It demonstrates marketplace UX, localization, browser AI-style interactions, financial calculations and local persistence — without requiring a paid backend.</p></div>
+        <div class="stack-list"><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Web Speech API</span><span>LocalStorage</span><span>Responsive UI</span></div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="footer-brand"><span class="brand-mark">N</span><strong>NivasaAI</strong></div><p>Smart property discovery · Built for the web</p><div><a href="#home">Home</a><a href="#explore">Explore</a><a href="#tools">Tools</a><a href="#calendar">Calendar</a></div></footer>
+
+  <div class="modal hidden" id="propertyModal"><div class="modal-box property-modal"><button class="modal-close">×</button><div id="propertyDetail"></div></div></div>
+  <div class="modal hidden" id="aiModal"><div class="modal-box ai-modal"><button class="modal-close">×</button><div class="ai-orb">✦</div><span class="eyebrow">NIVASA AI</span><h2>Your property copilot.</h2><p>Ask about affordability, locations, property types or how to use the marketplace.</p><div class="chat" id="chat"><div class="chat-bubble bot">Hi! I'm Nivasa AI. Try asking: <b>“What can I afford with ₹60,000 EMI?”</b></div></div><div class="chat-input"><input id="chatInput" placeholder="Ask Nivasa AI..."><button id="chatSend">Send</button></div></div></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
